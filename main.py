@@ -12,7 +12,9 @@ def download(id, location):
         print("Fetching list")
         beatmaplist.append("Testbeatmap")
 
-    threading.Thread(target=fetch_beatmap_list).start()
+    thread = threading.Thread(target=fetch_beatmap_list)
+    thread.start()
+    thread.join()
     
     print(beatmaplist)
     
@@ -21,8 +23,10 @@ def download(id, location):
         print("Downloading beatmaps")
         for beatmap in beatmaplist:
             print(f"{beatmap} downloaded")
-    threading.Thread(target=start_beatmap_download).start()
-    
+            
+    download_thread = threading.Thread(target=start_beatmap_download)
+    download_thread.start()
+
     window.enable_button()
 
 window.init_window(download)
