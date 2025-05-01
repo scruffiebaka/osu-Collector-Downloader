@@ -10,7 +10,7 @@ def return_json(beatmapsetid):
     try:
         response = requests.get(url, params={})
         if(response.status_code != 200):
-            raise Exception(f"Status code = {response.status_code}")
+            print(f"Status code = {response.status_code}")
         return response.json()
     except Exception as e:
-        raise Exception("Failed.")
+        print("Failed.")

@@ -78,3 +78,11 @@ def disable_button():
 
 def enable_button():
     button.config(state="active")
+
+def warning(infotext):
+    infobox = messagebox.showwarning(title="Warning", message=infotext)
+    
+def error(errortext, callback):
+    errorbox = messagebox.showerror(title="Error!", message=errortext)
+    if(errorbox):
+        callback()
