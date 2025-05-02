@@ -1,11 +1,14 @@
 import tkinter as tk
 import tkinter.font as tkFont
+from tkinter.ttk import Progressbar
 from tkinter import messagebox
 from helper import resource_path
 
-id_var = None 
+id_var = None
+default_location = None
 location_var = None
 button = None
+progress = 0
 
 def init_window(callback):
     # Initialize Window
@@ -14,7 +17,7 @@ def init_window(callback):
     window.resizable(width=False, height=False)
     
     # Set variables
-    global button, id_var, location_var
+    global button, id_var, location_var, progress
     id_var = tk.StringVar()
     location_var = tk.StringVar()
     
@@ -33,6 +36,10 @@ def init_window(callback):
     # Set the button
     button = tk.Button(text="Download", command=lambda: callback(id_var.get(), location_var.get()))
     button.place(x=500,y=130)
+    
+    # Progress bar
+    progress = Progressbar(window, orient="horizontal", length=620, mode='determinate')
+    progress.place(x=10,y=390)
     
     # Start the main loop
     window.mainloop()
@@ -71,6 +78,7 @@ def set_entries(window):
     beatmapid.place(x=200,y=82,width=100,height=30)
     
     downloadlocation=tk.Entry(window, textvariable=location_var)
+    downloadlocation.insert(-1, default_location)
     downloadlocation.place(x=200,y=132,width=250,height=30)
 
 def disable_button():
@@ -79,10 +87,16 @@ def disable_button():
 def enable_button():
     button.config(state="active")
 
-def warning(infotext):
-    infobox = messagebox.showwarning(title="Warning", message=infotext)
+def info(infotext):
+    enable_button()
+    infobox = messagebox.showinfo(title="Sucess!", message=infotext)
+
+def warning(warningtext):
+    enable_button()
+    warningbox = messagebox.showwarning(title="Warning", message=warningtext)
     
 def error(errortext, callback):
+    enable_button()
     errorbox = messagebox.showerror(title="Error!", message=errortext)
-    if(errorbox):
+    if((errorbox == "ok") & (callback != None)):
         callback()
