@@ -16,7 +16,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.13.3'
+        python-version: '3.11'
 
     - name: Install dependencies
       run: |
@@ -28,7 +28,7 @@ jobs:
         pyinstaller --onefile --noconsole --icon=assets/Icon.ico --add-data "assets;assets" main.py
 
     - name: Upload executable
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3.1.3
       with:
         name: Windows Executable
         path: dist/oc-downloader.exe
