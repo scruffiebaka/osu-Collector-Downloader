@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/d594aee5-ec67-4748-ad4d-7f061fafc5cf)# osu!Collector Downloader
+# osu!Collector Downloader
 
 A GUI application made in Python to download beatmaps from osucollector.com
 
