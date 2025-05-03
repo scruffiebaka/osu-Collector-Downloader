@@ -51,3 +51,4 @@ Currently its using catboy.best mirror but I plan on adding more.
 ## Todo:
 1. Implement different mirrors
 2. Rework on the GUI
+3. Saving previous download location
