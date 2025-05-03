@@ -1,3 +1,4 @@
+import threading
 import tkinter as tk
 import tkinter.font as tkFont
 from tkinter.ttk import Progressbar
@@ -34,7 +35,7 @@ def init_window(callback):
     set_entries(window=window)
     
     # Set the button
-    button = tk.Button(text="Download", command=lambda: callback(id_var.get(), location_var.get()))
+    button = tk.Button(text="Download", command=lambda: threaded_download(id_var.get(), location_var.get(), callback))
     button.place(x=500,y=130)
     
     # Progress bar
@@ -44,6 +45,10 @@ def init_window(callback):
     # Start the main loop
     window.mainloop()
 
+def threaded_download(id, location, callback):
+    thread = threading.Thread(target=lambda: callback(id, location), daemon=True)
+    thread.start()
+    
 def set_labels(window):
     welcome_label=tk.Label(window)
     welcome_label["anchor"] = "e"
@@ -97,6 +102,7 @@ def warning(warningtext):
     
 def error(errortext, callback):
     enable_button()
+    progress['value'] = 0
     errorbox = messagebox.showerror(title="Error!", message=errortext)
     if((errorbox == "ok") & (callback != None)):
         callback()
