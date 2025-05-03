@@ -9,4 +9,4 @@ if(os.path.exists(helper.resource_path("Downloads")) == False):
 
 window.default_location = helper.resource_path("Downloads")
 
-window.init_window(requestor.download)
+window.init_window(requestor.init_downloader)

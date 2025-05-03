@@ -55,9 +55,10 @@ def get_beatmap_file(path, id):
                             elapsed_time = time.time() - start_time
                             download_speed = downloaded / elapsed_time / 1024
                             
-                            print(f"Downloading {beatmapname}: {percent_downloaded:.2f}% - "
-                                f"{downloaded / 1024 / 1024:.2f} MB / {content_length / 1024 / 1024:.2f} MB - "
-                                f"Speed: {download_speed:.2f} KB/s", end='\r')
+                            window.canvas.itemconfig(window.name_text, text=urllib.parse.unquote(match.group(1)))
+                            window.canvas.itemconfig(window.size_text, text=f"{content_length / 1024 / 1024:.2f} MB")
+                            window.canvas.itemconfig(window.progress_text, text=f"{percent_downloaded:.2f}% - {downloaded / 1024 / 1024:.2f} MB / {content_length / 1024 / 1024:.2f} MB")
+                            window.canvas.itemconfig(window.speed_text, text=f"{download_speed:.2f} KB/s")
             else:
                 continue
             return "ok"
@@ -65,7 +66,7 @@ def get_beatmap_file(path, id):
             print("Retrying...")
     return "error"
 
-def download(id, location):
+def init_downloader(id, location):
     window.disable_button()
     
     # Declare info
@@ -94,6 +95,7 @@ def download(id, location):
     
     # Start the beatmap downloading
     def start_beatmap_download():
+        window.canvas.itemconfig(window.setname_text, text=f"Downloading: {name}")
         if (os.path.exists(os.path.join(location, name)) == False):
             os.mkdir(os.path.join(location, name))
         for beatmap in beatmaplist:
