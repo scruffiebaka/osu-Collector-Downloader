@@ -25,7 +25,7 @@ jobs:
 
     - name: Build with PyInstaller
       run: |
-        pyinstaller --onefile --noconsole --icon=assets/Icon.ico --add-data "assets;assets" main.py
+        pyinstaller --onefile --noconsole --name oc-downloader --icon=assets/Icon.ico --add-data "assets;assets" main.py
 
     - name: Upload executable
       uses: actions/upload-artifact@v4
