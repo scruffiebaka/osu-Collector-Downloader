@@ -1,9 +1,11 @@
-# osu!Collector Downloader
+![image](https://github.com/user-attachments/assets/d594aee5-ec67-4748-ad4d-7f061fafc5cf)# osu!Collector Downloader
 
 A GUI application made in Python to download beatmaps from osucollector.com
 
 ## Getting Started
 First off, you need the osu!collector ID. You can obtain one from the address bar of your web browser.
+![image](https://github.com/scruffiebaka/osuCOllector-Downloader/blob/main/assets/helper.png?raw=true)
+
 
 ### On Windows
 Simply grab the [latest release](https://github.com/scruffiebaka/osuCollector-Downloader/releases/latest) and run it.
