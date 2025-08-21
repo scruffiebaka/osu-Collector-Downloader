@@ -39,7 +39,7 @@ def get_beatmap_file(path, id):
                 continue
             elif(response.status_code == 200):
                 match = re.search(r'filename="(.+)"', response.headers.get('Content-Disposition', ''))
-                beatmapname = os.path.join(path, urllib.parse.unquote(match.group(1)))
+                beatmapname = os.path.join(path, remove_illegal_char(urllib.parse.unquote(match.group(1))))
                 content_length = int(response.headers.get('Content-Length', 0))
                 
                 with open(beatmapname, 'wb') as beatmap:
@@ -65,6 +65,9 @@ def get_beatmap_file(path, id):
         except requests.RequestException as e:
             print("Retrying...")
     return "error"
+
+def remove_illegal_char(name: str) -> str:
+    return re.sub(r'[<>:"/\\|?*]', '', name)
 
 def init_downloader(id, location):
     window.disable_button()
