@@ -93,7 +93,7 @@ def init_downloader(id, location):
         return
     print(beatmaplist)
     # Set the info
-    name = jsonprocessor.name
+    name = remove_illegal_char(jsonprocessor.name)
     description = jsonprocessor.description
     
     # Start the beatmap downloading
